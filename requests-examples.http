@@ -1,0 +1,74 @@
+# примеры API-запросов
+
+@baseUrl = http://127.0.0.1:8080
+
+# Запрос на создание юзера_1
+POST {{baseUrl}}/user/
+Content-Type: application/json
+
+{
+  "name": "user_1",
+  "password": "pass_1",
+  "email": "some_email_1@mail.ru"
+}
+
+###
+
+# Запрос на создание юзера_2
+POST {{baseUrl}}/user/
+Content-Type: application/json
+
+{
+  "name": "user_2",
+  "password": "pass_2",
+  "email": "some_email_2@mail.ru"
+}
+
+###
+
+# Запрос на создание объявления юзером_1
+POST {{baseUrl}}/ads/
+Content-Type: application/json
+email: some_email_1@mail.ru
+password: pass_1
+
+{
+  "header": "ad_header_1",
+  "description": "ad_description_1"
+}
+
+###
+# Запрос на создание объявления c НЕВЕРНЫМИ учетными данными
+POST {{baseUrl}}/ads/
+Content-Type: application/json
+email: some_email_1@mail.ru
+password: pass_2
+
+{
+  "header": "ad_header_2",
+  "description": "ad_description_2"
+}
+
+###
+
+# Запрос на чтение объявления
+GET {{baseUrl}}/ads/1/
+Content-Type: application/json
+
+###
+
+# Запрос на удаление объявления, созданного юзером_1 от лица юзер_2
+DELETE {{baseUrl}}/ads/1/
+Content-Type: application/json
+email: some_email_2@mail.ru
+password: pass_2
+
+###
+
+# Запрос на удаление объявления, созданного юзером_1 от лица юзер_1
+DELETE {{baseUrl}}/ads/1/
+Content-Type: application/json
+email: some_email_1@mail.ru
+password: pass_1
+
+###
