@@ -101,6 +101,16 @@ class AdView(MethodView):
             add_db_obj(ad)
             return jsonify(ad.dict)
 
+    def patch(self, ad_id: int):
+        ad = get_add(ad_id)
+        user_id = is_authorizated_user(request)
+        is_owner(ad, user_id)
+        ad_data = request.json
+        for key, value in ad_data.items():
+            setattr(ad, key, value)
+        add_db_obj(ad)
+        return jsonify(ad.dict)
+
     def delete(self, ad_id: int):
         ad = get_add(ad_id)
         user_id = is_authorizated_user(request)
@@ -115,6 +125,6 @@ ad_view = AdView.as_view("ad")
 
 app.add_url_rule("/user/", methods=["POST"], view_func=user_view)
 app.add_url_rule("/ads/", methods=["POST"], view_func=ad_view)
-app.add_url_rule("/ads/<int:ad_id>/", methods=["GET", "DELETE"], view_func=ad_view)
+app.add_url_rule("/ads/<int:ad_id>/", methods=["GET", "DELETE", "PATCH"], view_func=ad_view)
 
 app.run(port=8080)

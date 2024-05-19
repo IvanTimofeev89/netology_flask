@@ -38,6 +38,19 @@ password: pass_1
 }
 
 ###
+
+# Запрос на изменение объявления 1 юзером_1
+PATCH {{baseUrl}}/ads/1/
+Content-Type: application/json
+email: some_email_1@mail.ru
+password: pass_1
+
+{
+  "header": "changed_ad_header_1"
+}
+
+###
+
 # Запрос на создание объявления c НЕВЕРНЫМИ учетными данными
 POST {{baseUrl}}/ads/
 Content-Type: application/json
